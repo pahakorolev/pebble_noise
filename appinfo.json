@@ -1,0 +1,26 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "pahakorolev@gmail.com",
+    "longName": "Noise",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/ic_launcher.png",
+                "menuIcon": true,
+                "name": "LAUNCHER",
+                "type": "png"
+            }
+        ]
+    },
+    "shortName": "Noise",
+    "uuid": "31b5b9d1-c502-4a73-91dc-194e6ecf8b91",
+    "versionCode": 1,
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
