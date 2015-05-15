@@ -26,14 +26,16 @@ static void update_proc_draw_pixel(Layer *layer, GContext *ctx) {
 
 static void update_proc_frame_buffer(Layer *layer, GContext *ctx){
 	GBitmap *fb = graphics_capture_frame_buffer(ctx);
-	GRect bounds=fb->bounds;
-	uint8_t *pos = (uint8_t *)fb->addr;
-	for (int16_t y = bounds.origin.y; y < bounds.size.h; y++) {
-		for (int16_t x = bounds.origin.x; x < fb->row_size_bytes; x++){
-			memset(++pos, rand(), 1);
-		}
+	if (fb!=NULL){
+	  GRect bounds=gbitmap_get_bounds(fb);
+	  uint8_t *pos = gbitmap_get_data(fb);
+	  for (int16_t y = bounds.origin.y; y < bounds.size.h; y++) {
+		  for (int16_t x = bounds.origin.x; x < gbitmap_get_bytes_per_row(fb); x++){
+			  memset(++pos, rand(), 1);
+		  }
+    }
+	  graphics_release_frame_buffer(ctx, fb);
   }
-	graphics_release_frame_buffer(ctx, fb);
 }
 
 static LayerUpdateProc update_procs[] = {
@@ -75,8 +77,10 @@ static void init(void) {
     .load = main_window_load,
     .unload = main_window_unload,
   });
+#ifdef PBL_SDK_2
 	// Get rid of the top bar
 	window_set_fullscreen(window, true);
+#endif
   window_stack_push(window, false);
 	window_set_click_config_provider(window, click_config_provider);
 }

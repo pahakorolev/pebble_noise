@@ -16,9 +16,12 @@
             }
         ]
     },
+    "sdkVersion": "3",
     "shortName": "Noise",
+    "targetPlatforms": [
+        "basalt"
+    ],
     "uuid": "31b5b9d1-c502-4a73-91dc-194e6ecf8b91",
-    "versionCode": 1,
     "versionLabel": "1.1",
     "watchapp": {
         "watchface": false
