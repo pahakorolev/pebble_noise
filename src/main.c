@@ -24,8 +24,23 @@ static void update_proc_draw_pixel(Layer *layer, GContext *ctx) {
 	}
 }
 
+static void update_proc_round_frame_buffer(Layer *layer, GContext *ctx) {
+  GBitmap *fb = graphics_capture_frame_buffer(ctx);
+  GRect bounds = layer_get_bounds(layer);
+  for(int y = 0; y < bounds.size.h; y++) {
+    GBitmapDataRowInfo info = gbitmap_get_data_row_info(fb, y);
+    for(int x = info.min_x; x < info.max_x; x++) {
+      memset(&info.data[x], rand(), 1);
+    }
+  }
+  graphics_release_frame_buffer(ctx, fb);
+}
+
 static void update_proc_frame_buffer(Layer *layer, GContext *ctx){
-	GBitmap *fb = graphics_capture_frame_buffer(ctx);
+#if defined(PBL_ROUND)
+	update_proc_round_frame_buffer(layer, ctx);
+#else
+  GBitmap *fb = graphics_capture_frame_buffer(ctx);
 	if (fb!=NULL){
 	  GRect bounds=gbitmap_get_bounds(fb);
 	  uint8_t *pos = gbitmap_get_data(fb);
@@ -36,6 +51,7 @@ static void update_proc_frame_buffer(Layer *layer, GContext *ctx){
     }
 	  graphics_release_frame_buffer(ctx, fb);
   }
+#endif
 }
 
 static LayerUpdateProc update_procs[] = {

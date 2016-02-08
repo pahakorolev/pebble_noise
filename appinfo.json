@@ -4,6 +4,7 @@
         ""
     ],
     "companyName": "pahakorolev@gmail.com",
+    "enableMultiJS": false,
     "longName": "Noise",
     "projectType": "native",
     "resources": {
@@ -12,17 +13,19 @@
                 "file": "images/ic_launcher.png",
                 "menuIcon": true,
                 "name": "LAUNCHER",
-                "type": "png"
+                "type": "bitmap"
             }
         ]
     },
     "sdkVersion": "3",
     "shortName": "Noise",
     "targetPlatforms": [
-        "basalt"
+        "aplite",
+        "basalt",
+        "chalk"
     ],
     "uuid": "31b5b9d1-c502-4a73-91dc-194e6ecf8b91",
-    "versionLabel": "1.1",
+    "versionLabel": "1.2",
     "watchapp": {
         "watchface": false
     }
